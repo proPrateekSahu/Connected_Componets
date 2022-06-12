@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int N=1e5+10;
+vector<int> graph[N];
+vector<int> v;
+bool vis[N];
+
+void DFS(int vertex){
+	vis[vertex]=true;
+	v.push_back(vertex);
+	for(auto child: graph[vertex]){
+		if(vis[child]!=true){
+			DFS(child);
+		}
+	}
+}
+
+
+
+
+int main() {
+		ll count=0;
+		ll n,e;
+		cin>>n>>e;
+		for(int i=1;i<=e;i++){
+			ll a,b;
+			cin>>a>>b;
+			graph[a].push_back(b);
+			graph[b].push_back(a);
+
+
+		}
+		for(int i=1;i<=n;i++){
+			if(vis[i]!=true)
+			{
+			    v.clear();
+			   DFS(i);
+			count++;
+			// Each connected component elements
+			for(auto h:v){
+			    cout<<h<<" ";
+			}
+			cout<<endl;
+			
+			}
+		}
+		cout<<count<<endl;//No. of connected components
+		
+	
+}
